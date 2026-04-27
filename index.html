@@ -1,159 +1,411 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FITNESS PRO | Dashboard</title>
+    <title>Fit Pro | داشبورد المدرب المحترف</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body { font-family: 'Cairo', sans-serif; background-color: #020617; }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        body { font-family: 'Cairo', sans-serif; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-content.active { display: block; }
+        .sidebar-item.active { background-color: #1e293b; border-right: 4px solid #10b981; color: #10b981; }
+        input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
-<body class="text-slate-200 antialiased">
+<body class="bg-slate-950 text-slate-200 antialiased min-h-screen flex">
 
-    <div class="flex min-h-screen">
-        <aside class="w-20 md:w-72 bg-slate-900 border-l border-slate-800 flex flex-col items-center py-10 px-4 sticky top-0 h-screen z-50">
-            <div class="mb-12 text-emerald-500 font-black text-xl hidden md:block italic tracking-tighter text-center leading-tight">
-                FITNESS TIME <span class="text-white block">PRO DASHBOARD</span>
+    <aside class="w-64 bg-slate-900 border-l border-slate-800 flex-shrink-0 sticky top-0 h-screen hidden md:flex flex-col">
+        <div class="p-6 border-b border-slate-800 text-center">
+            <h1 class="text-2xl font-bold bg-gradient-to-l from-emerald-400 to-cyan-400 bg-clip-text text-transparent">FIT PRO</h1>
+            <p class="text-xs text-slate-500 mt-1 uppercase tracking-widest">Trainer Dashboard</p>
+        </div>
+        
+        <nav class="flex-1 mt-6 overflow-y-auto">
+            <button onclick="switchTab('rm-calc')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400 active" id="btn-rm-calc">
+                <i class="fas fa-calculator ml-3 w-5"></i>
+                <span>حاسبة 1RM</span>
+            </button>
+            <button onclick="switchTab('exercise-db')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-exercise-db">
+                <i class="fas fa-book-medical ml-3 w-5"></i>
+                <span>قاموس التمارين</span>
+            </button>
+            <button onclick="switchTab('gym-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-gym-prog">
+                <i class="fas fa-dumbbell ml-3 w-5"></i>
+                <span>برنامج التقويات</span>
+            </button>
+            <button onclick="switchTab('run-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-run-prog">
+                <i class="fas fa-running ml-3 w-5"></i>
+                <span>برنامج الجري</span>
+            </button>
+            <button onclick="switchTab('row-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-row-prog">
+                <i class="fas fa-water ml-3 w-5"></i>
+                <span>برنامج التجديف</span>
+            </button>
+            <button onclick="switchTab('fitness-test')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-fitness-test">
+                <i class="fas fa-vial ml-3 w-5"></i>
+                <span>الاختبارات البدنية</span>
+            </button>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-w-0">
+        <header class="h-16 bg-slate-900/50 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-8 sticky top-0 z-10">
+            <div id="tab-title" class="text-lg font-semibold text-white">حاسبة 1RM</div>
+            <div class="flex items-center gap-4">
+                <span class="text-sm text-slate-400 hidden sm:block">كابتن محمد علي</span>
+                <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-slate-900 font-bold">M</div>
             </div>
-            <nav class="flex flex-col gap-3 w-full">
-                <button onclick="showTab(1)" class="tab-btn active w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800 group" data-tab="1">
-                    <span class="text-xl">📊</span> <span class="hidden md:block text-sm font-bold">حاسبة 1RM</span>
-                </button>
-                <button onclick="showTab(2)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="2">
-                    <span class="text-xl">📖</span> <span class="hidden md:block text-sm font-bold">قاموس التمارين</span>
-                </button>
-                <button onclick="showTab(3)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="3">
-                    <span class="text-xl">🏋️</span> <span class="hidden md:block text-sm font-bold">برنامج التقويات</span>
-                </button>
-                <button onclick="showTab(4)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="4">
-                    <span class="text-xl">🏃</span> <span class="hidden md:block text-sm font-bold">تطوير الجري</span>
-                </button>
-                <button onclick="showTab(5)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="5">
-                    <span class="text-xl">🚣</span> <span class="hidden md:block text-sm font-bold">التجديف</span>
-                </button>
-                <button onclick="showTab(6)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="6">
-                    <span class="text-xl">🎯</span> <span class="hidden md:block text-sm font-bold">الاختبارات</span>
-                </button>
-            </nav>
-        </aside>
+        </header>
 
-        <main class="flex-1 p-6 md:p-12 overflow-y-auto h-screen bg-slate-950">
+        <div class="p-4 md:p-8">
             
-            <div id="tab-1" class="tab-content active">
-                <h2 class="text-2xl font-black text-white mb-6 border-b border-slate-800 pb-4">حاسبة الـ 1RM والشدة</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="rm-grid"></div>
-            </div>
-
-            <div id="tab-2" class="tab-content">
-                <h2 class="text-2xl font-black text-white mb-6">قاموس التمارين</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="exercise-grid"></div>
-            </div>
-
-            <div id="tab-3" class="tab-content">
-                <h2 class="text-2xl font-black text-white mb-6">برنامج التقويات (Waves)</h2>
-                <button onclick="generateWaves()" class="bg-emerald-600 p-4 rounded-xl font-bold mb-8">توليد برنامج الـ 12 أسبوع</button>
-                <div id="waves-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
-            </div>
-
-            <div id="tab-4" class="tab-content text-center py-10">
-                <h2 class="text-2xl font-black text-white mb-6">مناطق نبض القلب (Running)</h2>
-                <input type="number" id="age-input" placeholder="أدخل عمرك" class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center text-white mb-6">
-                <button onclick="calcZones()" class="bg-blue-600 p-4 rounded-xl block mx-auto">احسب المناطق</button>
-                <div id="zones-res" class="mt-8 space-y-4 max-w-md mx-auto"></div>
-            </div>
-
-            <div id="tab-5" class="tab-content text-center">
-                <h2 class="text-2xl font-black text-white mb-6 uppercase italic">Rowing Concept 2</h2>
-                <div class="flex gap-2 justify-center mb-6">
-                    <input type="number" id="row-m" placeholder="دقيقة" class="bg-slate-900 p-3 rounded-lg text-white w-24">
-                    <input type="number" id="row-s" placeholder="ثانية" class="bg-slate-900 p-3 rounded-lg text-white w-24">
-                </div>
-                <button onclick="calcRow()" class="bg-orange-600 p-4 rounded-xl">تحليل الـ Split</button>
-                <div id="row-res" class="mt-8 text-3xl font-black text-orange-500 italic"></div>
-            </div>
-
-            <div id="tab-6" class="tab-content">
-                <h2 class="text-2xl font-black text-white mb-6 italic uppercase">Physical Benchmarks</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800">
-                        <p class="text-purple-400 font-bold mb-4">Cooper Test (12m)</p>
-                        <input type="number" id="cooper-in" placeholder="المسافة بالمتر" class="bg-slate-950 p-3 rounded-lg w-full text-white mb-4">
-                        <button onclick="evalTest('cooper')" class="bg-purple-600 w-full p-2 rounded-lg font-bold">تقييم</button>
-                        <div id="cooper-res" class="mt-4 font-bold"></div>
+            <section id="rm-calc" class="tab-content active space-y-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-emerald-400 italic">MASTER STRENGTH DATA</h2>
+                    <div class="flex bg-slate-900 p-1 rounded-lg border border-slate-800">
+                        <button onclick="setUnit('KG')" id="unit-kg" class="px-4 py-1 rounded-md bg-emerald-500 text-slate-950 font-bold">KG</button>
+                        <button onclick="setUnit('LB')" id="unit-lb" class="px-4 py-1 rounded-md text-slate-400">LB</button>
                     </div>
                 </div>
-            </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="rm-inputs-container">
+                    </div>
+            </section>
 
-        </main>
-    </div>
+            <section id="exercise-db" class="tab-content space-y-6">
+                <h2 class="text-2xl font-bold text-amber-400 italic mb-6">EXERCISE DICTIONARY</h2>
+                <div id="exercise-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    </div>
+            </section>
+
+            <section id="gym-prog" class="tab-content space-y-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h2 class="text-2xl font-bold text-cyan-400 mb-4">Wave Periodization (12 Weeks)</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">أيام التدريب أسبوعياً</label>
+                            <select id="gym-days" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-white">
+                                <option value="1">يوم واحد</option>
+                                <option value="2">يومان</option>
+                                <option value="3">3 أيام</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">توليد البرنامج</label>
+                            <button onclick="generateGymProgram()" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2.5 rounded-lg transition-all">تحديث البرنامج</button>
+                        </div>
+                    </div>
+                    <div id="gym-program-table" class="overflow-x-auto">
+                        <p class="text-slate-500 text-center py-10">اختر تمارين من القاموس أولاً لبناء برنامجك.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="run-prog" class="tab-content space-y-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h2 class="text-2xl font-bold text-rose-400 mb-6 italic">30 MIN RUN DEVELOPMENT</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">مسافة الاختبار (متر)</label>
+                            <input type="number" id="run-test-dist" placeholder="مثلاً 5000" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-white">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">التردد الأسبوعي</label>
+                            <select class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-white">
+                                <option>1 يوم</option>
+                                <option>2 يوم</option>
+                                <option>3 أيام</option>
+                            </select>
+                        </div>
+                        <div class="flex items-end">
+                            <button class="w-full bg-rose-600 py-2.5 rounded-lg font-bold">تحديث البيانات</button>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-slate-950 rounded-xl border-r-4 border-rose-500">
+                            <h3 class="font-bold text-rose-400">المرحلة 1: البناء الهوائي (أسبوع 1-3)</h3>
+                            <p class="text-sm text-slate-400">Zone 2 - الحفاظ على نبض 110-127 bpm.</p>
+                        </div>
+                        <div class="p-4 bg-slate-950 rounded-xl border-r-4 border-amber-500 opacity-60">
+                            <h3 class="font-bold text-amber-500">المرحلة 2: الفترات وتطوير VO2 Max (أسبوع 4-6)</h3>
+                            <p class="text-sm text-slate-400">Intervals 400m/800m.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="row-prog" class="tab-content space-y-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+                    <h2 class="text-2xl font-bold text-blue-400 mb-6 italic">CONCEPT 2 ROWING - 2000M</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">زمن اختبار الـ 2000م (MM:SS)</label>
+                            <input type="text" placeholder="07:30" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-white text-center font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-sm text-slate-400 mb-1">المقاومة المقترحة (Damper)</label>
+                            <div class="p-2.5 bg-slate-950 rounded-lg text-blue-400 font-bold text-center border border-slate-800">4 - 6</div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <h3 class="text-blue-400 font-bold mb-2">أهداف البرنامج 12 أسبوع:</h3>
+                        <ul class="text-sm space-y-2 text-slate-400">
+                            <li>• تطوير الـ Stroke Per Minute (SPM).</li>
+                            <li>• تحسين كفاءة الـ Split لكل 500 متر.</li>
+                            <li>• المرحلة الأخيرة: محاكاة سباق وجاهزية قصوى.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="fitness-test" class="tab-content space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 lg:col-span-1">
+                        <h3 class="text-lg font-bold text-emerald-400 mb-4 border-b border-slate-800 pb-2">الملف الحيوي</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="text-xs text-slate-500">العمر</label>
+                                <input type="number" id="user-age" value="38" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500">الطول (سم)</label>
+                                <input type="number" id="user-height" placeholder="175" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white">
+                            </div>
+                            <div>
+                                <label class="text-xs text-slate-500">الوزن (كجم)</label>
+                                <input type="number" id="user-weight" placeholder="112.2" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-2 text-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 lg:col-span-2">
+                        <h3 class="text-lg font-bold text-amber-400 mb-4 border-b border-slate-800 pb-2">نتائج الاختبارات البدنية</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <label class="block text-sm mb-2">اختبار كوبر (12 دقيقة)</label>
+                                <input type="number" placeholder="المسافة بالمتر" oninput="calcCooper(this.value)" class="w-full bg-slate-900 border border-slate-800 rounded p-2 text-emerald-400">
+                                <div id="cooper-result" class="mt-2 text-xs font-bold text-slate-500 uppercase">-</div>
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <label class="block text-sm mb-2">اختبار الضغط (دقيقة)</label>
+                                <input type="number" placeholder="عدد التكرارات" class="w-full bg-slate-900 border border-slate-800 rounded p-2 text-amber-400">
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <label class="block text-sm mb-2">اختبار القرفصاء (دقيقتين)</label>
+                                <input type="number" placeholder="عدد التكرارات" class="w-full bg-slate-900 border border-slate-800 rounded p-2 text-cyan-400">
+                            </div>
+                            <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                                <label class="block text-sm mb-2">اختبار البلانك</label>
+                                <input type="number" placeholder="الزمن بالثواني" class="w-full bg-slate-900 border border-slate-800 rounded p-2 text-rose-400">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
 
     <script>
-        function showTab(id) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`tab-${id}`).classList.add('active');
-            document.querySelectorAll('.tab-btn').forEach(b => {
-                b.classList.remove('bg-slate-800', 'text-emerald-500');
-                if(b.dataset.tab == id) b.classList.add('bg-slate-800', 'text-emerald-500');
-            });
+        // --- Core Application Logic ---
+        let currentUnit = 'KG';
+        const exercises = ['Squat', 'Front Squat', 'Shoulder Press', 'Deadlift', 'Snatch', 'Clean', 'Jerk'];
+        let selectedExercises = JSON.parse(localStorage.getItem('selectedExercises')) || [];
+
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderRMInputs();
+            renderDictionary();
+            loadSavedData();
+        });
+
+        // --- Tab Switching ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.sidebar-item').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+            
+            const titles = {
+                'rm-calc': 'حاسبة الـ 1RM والشدة',
+                'exercise-db': 'قاموس التمارين الشامل',
+                'gym-prog': 'برنامج التقويات - Wave System',
+                'run-prog': 'تطوير الجري - 30 Min Run',
+                'row-prog': 'برنامج التجديف Concept 2',
+                'fitness-test': 'الاختبارات والتحليل البدني'
+            };
+            document.getElementById('tab-title').innerText = titles[tabId];
         }
 
-        // Logic for 1RM
-        const exList = ["Back Squat", "Front Squat", "Shoulder Press", "Deadlift", "Clean", "Snatch"];
-        function initRM() {
-            const grid = document.getElementById('rm-grid');
-            exList.forEach((ex, i) => {
-                grid.innerHTML += `
-                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
-                        <h4 class="text-emerald-500 font-bold mb-4 uppercase text-xs">${ex}</h4>
-                        <div class="flex gap-2 mb-4 text-slate-950">
-                            <input type="number" id="w-${i}" oninput="update(${i})" placeholder="وزن" class="w-1/2 p-2 rounded-lg bg-slate-950 text-white border border-slate-800 outline-none">
-                            <input type="number" id="r-${i}" oninput="update(${i})" placeholder="عدات" class="w-1/2 p-2 rounded-lg bg-slate-950 text-white border border-slate-800 outline-none">
-                        </div>
-                        <div class="text-center bg-slate-950 p-3 rounded-xl border border-slate-800">
-                            <span id="res-${i}" class="text-3xl font-black text-white">0</span> <span class="text-[10px] text-slate-500">KG</span>
-                        </div>
-                    </div>`;
-            });
-        }
-        function update(i) {
-            const w = document.getElementById(`w-${i}`).value || 0;
-            const r = document.getElementById(`r-${i}`).value || 0;
-            const rm = r == 1 ? w : w * (1 + r/30);
-            document.getElementById(`res-${i}`).innerText = Math.round(rm);
+        // --- 1RM Logic ---
+        function setUnit(unit) {
+            currentUnit = unit;
+            document.getElementById('unit-kg').className = unit === 'KG' ? 'px-4 py-1 rounded-md bg-emerald-500 text-slate-950 font-bold' : 'px-4 py-1 rounded-md text-slate-400';
+            document.getElementById('unit-lb').className = unit === 'LB' ? 'px-4 py-1 rounded-md bg-emerald-500 text-slate-950 font-bold' : 'px-4 py-1 rounded-md text-slate-400';
+            renderRMInputs();
+            loadSavedData();
         }
 
-        // Running Zones
-        function calcZones() {
-            const age = document.getElementById('age-input').value || 38;
-            const max = 220 - age;
-            const res = document.getElementById('zones-res');
-            res.innerHTML = `
-                <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 font-bold">Zone 2 (Aerobic): ${Math.round(max*0.6)}-${Math.round(max*0.7)} BPM</div>
-                <div class="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 font-bold">Zone 4 (Threshold): ${Math.round(max*0.8)}-${Math.round(max*0.9)} BPM</div>
+        function renderRMInputs() {
+            const container = document.getElementById('rm-inputs-container');
+            container.innerHTML = exercises.map(ex => `
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 hover:border-emerald-500/50 transition-colors">
+                    <h3 class="text-xl font-bold text-white mb-4 flex justify-between">
+                        ${ex} <span class="text-xs text-slate-500 font-normal uppercase tracking-widest self-center">${currentUnit}</span>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label class="text-[10px] uppercase text-slate-500 block mb-1">الوزن المرفوع</label>
+                            <input type="number" id="w-${ex}" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-emerald-400 font-bold focus:ring-1 focus:ring-emerald-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase text-slate-500 block mb-1">التكرارات</label>
+                            <input type="number" id="r-${ex}" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-lg p-3 text-emerald-400 font-bold focus:ring-1 focus:ring-emerald-500 outline-none">
+                        </div>
+                    </div>
+                    <div id="table-${ex}" class="mt-4 border-t border-slate-800 pt-4 hidden">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-sm font-bold text-white">1RM: <span id="res-${ex}" class="text-emerald-400">0</span></span>
+                        </div>
+                        <table class="w-full text-left text-[11px]">
+                            <thead class="text-slate-500">
+                                <tr><th class="pb-2">شدة %</th><th class="pb-2 text-right">KG</th><th class="pb-2 text-right">LB</th></tr>
+                            </thead>
+                            <tbody id="tbody-${ex}" class="text-slate-300"></tbody>
+                        </table>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function calculateRM(ex) {
+            const w = parseFloat(document.getElementById(`w-${ex}`).value);
+            const r = parseFloat(document.getElementById(`r-${ex}`).value);
+            const tableDiv = document.getElementById(`table-${ex}`);
+            
+            if (w > 0 && r > 0) {
+                const rm = w * (1 + r / 30);
+                document.getElementById(`res-${ex}`).innerText = rm.toFixed(1) + ' ' + currentUnit;
+                tableDiv.classList.remove('hidden');
+                
+                let html = '';
+                for (let i = 100; i >= 40; i -= 5) {
+                    const valInKG = currentUnit === 'KG' ? rm * (i / 100) : (rm * (i / 100)) / 2.20462;
+                    const valInLB = currentUnit === 'LB' ? rm * (i / 100) : (rm * (i / 100)) * 2.20462;
+                    html += `<tr class="border-t border-slate-800/50">
+                        <td class="py-1.5 font-bold text-slate-400">${i}%</td>
+                        <td class="py-1.5 text-right font-mono">${valInKG.toFixed(1)}</td>
+                        <td class="py-1.5 text-right font-mono text-emerald-500/80">${valInLB.toFixed(1)}</td>
+                    </tr>`;
+                }
+                document.getElementById(`tbody-${ex}`).innerHTML = html;
+                
+                // Save
+                localStorage.setItem(`data-${ex}`, JSON.stringify({w, r}));
+            } else {
+                tableDiv.classList.add('hidden');
+            }
+        }
+
+        // --- Exercise Dictionary ---
+        const dictionaryData = {
+            "Chest (الصدر)": ["Flat Bench Press", "Incline Bench Press", "Decline Bench Press", "Flat Dumbbell Press", "Incline Dumbbell Press", "Dumbbell Flyes", "Chest Press Machine", "Pec Deck Machine"],
+            "Back (الظهر)": ["Deadlift", "Bent-Over Barbell Row", "T-Bar Row", "Lat Pulldown", "Seated Cable Row", "Single-Arm Dumbbell Row", "Face Pulls"],
+            "Legs (الأرجل)": ["Back Squat", "Front Squat", "Romanian Deadlift (RDL)", "Barbell Lunges", "Hip Thrusts", "Leg Press", "Hack Squat", "Leg Extension", "Leg Curl"],
+            "Shoulders (الأكتاف)": ["Overhead Press", "Push Press", "Dumbbell Shoulder Press", "Lateral Raise", "Rear Delt Raise", "Machine Shoulder Press"],
+            "Arms (الذراعين)": ["Barbell Curl", "Hammer Curl", "EZ-Bar Curl", "Close-Grip Bench Press", "Skull Crushers", "Cable Rope Pushdown"]
+        };
+
+        function renderDictionary() {
+            const grid = document.getElementById('exercise-grid');
+            grid.innerHTML = Object.entries(dictionaryData).map(([category, items]) => `
+                <div class="bg-slate-900 p-5 rounded-2xl border border-slate-800">
+                    <h3 class="text-amber-400 font-bold mb-4 border-b border-slate-800 pb-2">${category}</h3>
+                    <div class="space-y-2">
+                        ${items.map(item => `
+                            <div class="flex items-center justify-between p-2 hover:bg-slate-800 rounded transition-all cursor-pointer group" onclick="toggleSelect('${item}')">
+                                <span class="text-sm text-slate-300 group-hover:text-white">${item}</span>
+                                <i class="fas ${selectedExercises.includes(item) ? 'fa-check-circle text-emerald-500' : 'fa-plus-circle text-slate-700'}" id="icon-${item.replace(/\s/g, '')}"></i>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleSelect(item) {
+            const index = selectedExercises.indexOf(item);
+            if (index > -1) selectedExercises.splice(index, 1);
+            else selectedExercises.push(item);
+            
+            localStorage.setItem('selectedExercises', JSON.stringify(selectedExercises));
+            renderDictionary();
+        }
+
+        // --- Gym Program Wave System ---
+        function generateGymProgram() {
+            const container = document.getElementById('gym-program-table');
+            if (selectedExercises.length === 0) {
+                container.innerHTML = '<p class="text-rose-400 text-center py-10">برجاء اختيار تمارين من القاموس أولاً.</p>';
+                return;
+            }
+
+            let html = `
+                <table class="w-full mt-4 text-right border-collapse">
+                    <thead>
+                        <tr class="bg-slate-800 text-cyan-400 text-xs">
+                            <th class="p-3">التمرين (Exercise)</th>
+                            <th class="p-3">الأسبوع 1 (75%)</th>
+                            <th class="p-3">الأسبوع 2 (85%)</th>
+                            <th class="p-3">الأسبوع 3 (95%)</th>
+                            <th class="p-3 bg-slate-700">أسبوع 4 (Deload)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
             `;
+
+            selectedExercises.forEach(ex => {
+                html += `
+                    <tr class="border-b border-slate-800">
+                        <td class="p-3 font-bold text-slate-300">${ex}</td>
+                        <td class="p-3 text-xs">12-15 تكرار<br><span class="text-slate-500 italic">راحة: 90ث</span></td>
+                        <td class="p-3 text-xs">8-10 تكرار<br><span class="text-slate-500 italic">راحة: 2د</span></td>
+                        <td class="p-3 text-xs">5-6 تكرار<br><span class="text-slate-500 italic">راحة: 4د</span></td>
+                        <td class="p-3 text-xs bg-slate-900/50">8-10 تكرار<br><span class="text-rose-400 italic">استشفاء</span></td>
+                    </tr>
+                `;
+            });
+
+            html += `</tbody></table>`;
+            container.innerHTML = html;
         }
 
-        // Rowing
-        function calcRow() {
-            const m = document.getElementById('row-m').value || 0;
-            const s = document.getElementById('row-s').value || 0;
-            const split = ((parseInt(m)*60) + parseInt(s)) / 4;
-            document.getElementById('row-res').innerText = `Pace: ${Math.floor(split/60)}:${Math.round(split%60).toString().padStart(2,'0')} /500m`;
+        // --- Utils & Persistence ---
+        function loadSavedData() {
+            exercises.forEach(ex => {
+                const saved = localStorage.getItem(`data-${ex}`);
+                if (saved) {
+                    const {w, r} = JSON.parse(saved);
+                    if (document.getElementById(`w-${ex}`)) {
+                        document.getElementById(`w-${ex}`).value = w;
+                        document.getElementById(`r-${ex}`).value = r;
+                        calculateRM(ex);
+                    }
+                }
+            });
         }
 
-        // Tests
-        function evalTest(type) {
-            const v = document.getElementById('cooper-in').value;
-            let l = v > 2800 ? "ممتاز" : (v > 2200 ? "جيد" : "ضعيف");
-            document.getElementById('cooper-res').innerText = `التقييم: ${l}`;
+        function calcCooper(dist) {
+            const res = document.getElementById('cooper-result');
+            if (dist > 2800) { res.innerText = "ممتاز (Excellent)"; res.className = "mt-2 text-xs font-bold text-emerald-400 uppercase"; }
+            else if (dist > 2400) { res.innerText = "جيد جداً (Above Avg)"; res.className = "mt-2 text-xs font-bold text-cyan-400 uppercase"; }
+            else { res.innerText = "يحتاج تطوير (Needs Work)"; res.className = "mt-2 text-xs font-bold text-rose-400 uppercase"; }
         }
 
-        window.onload = () => { initRM(); showTab(1); };
     </script>
 </body>
 </html>
