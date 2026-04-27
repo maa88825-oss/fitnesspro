@@ -317,7 +317,7 @@
             "Back (الظهر)": ["Deadlift", "Bent-Over Barbell Row", "T-Bar Row", "Lat Pulldown", "Seated Cable Row", "Single-Arm Dumbbell Row", "Face Pulls"],
             "Legs (الأرجل)": ["Back Squat", "Front Squat", "Romanian Deadlift (RDL)", "Barbell Lunges", "Hip Thrusts", "Leg Press", "Hack Squat", "Leg Extension", "Leg Curl"],
             "Shoulders (الأكتاف)": ["Overhead Press", "Push Press", "Dumbbell Shoulder Press", "Lateral Raise", "Rear Delt Raise", "Machine Shoulder Press"],
-            "Arms (الذراعين)": ["Barbell Curl", "Hammer Curl", "EZ-Bar Curl", "Close-Grip Bench Press", "Skull Crushers", "Cable Rope Pushdown"]
+            "Arms (الذراعين)": ["Barbell Curl", "Hammer Curl", "EZ-Bar Curl", "Close-Grip Bench Press", "Skull Crushers","Triceps push down", "Cable Rope Pushdown"]
         };
 
         function renderDictionary() {
@@ -347,42 +347,71 @@
         }
 
         // --- Gym Program Wave System ---
-        function generateGymProgram() {
-            const container = document.getElementById('gym-program-table');
-            if (selectedExercises.length === 0) {
-                container.innerHTML = '<p class="text-rose-400 text-center py-10">برجاء اختيار تمارين من القاموس أولاً.</p>';
-                return;
-            }
+        
+function generateGymProgram() {
+    const container = document.getElementById('gym-program-table');
+    if (selectedExercises.length === 0) {
+        container.innerHTML = '<p class="text-rose-400 text-center py-10">برجاء اختيار تمارين من القاموس أولاً.</p>';
+        return;
+    }
 
-            let html = `
-                <table class="w-full mt-4 text-right border-collapse">
-                    <thead>
-                        <tr class="bg-slate-800 text-cyan-400 text-xs">
-                            <th class="p-3">التمرين (Exercise)</th>
-                            <th class="p-3">الأسبوع 1 (75%)</th>
-                            <th class="p-3">الأسبوع 2 (85%)</th>
-                            <th class="p-3">الأسبوع 3 (95%)</th>
-                            <th class="p-3 bg-slate-700">أسبوع 4 (Deload)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-            `;
+    let html = `
+        <div class="overflow-x-auto">
+        <table class="w-full mt-4 text-right border-collapse min-w-[700px]">
+            <thead>
+                <tr class="bg-slate-800 text-cyan-400 text-xs">
+                    <th class="p-3">التمرين (Exercise)</th>
+                    <th class="p-3">وزن 10RM</th>
+                    <th class="p-3">الأسبوع 1 (75%)</th>
+                    <th class="p-3">الأسبوع 2 (85%)</th>
+                    <th class="p-3">الأسبوع 3 (95%)</th>
+                    <th class="p-3 bg-slate-700 text-white">أسبوع 4 (Deload)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+    `;
 
-            selectedExercises.forEach(ex => {
-                html += `
-                    <tr class="border-b border-slate-800">
-                        <td class="p-3 font-bold text-slate-300">${ex}</td>
-                        <td class="p-3 text-xs">12-15 تكرار<br><span class="text-slate-500 italic">راحة: 90ث</span></td>
-                        <td class="p-3 text-xs">8-10 تكرار<br><span class="text-slate-500 italic">راحة: 2د</span></td>
-                        <td class="p-3 text-xs">5-6 تكرار<br><span class="text-slate-500 italic">راحة: 4د</span></td>
-                        <td class="p-3 text-xs bg-slate-900/50">8-10 تكرار<br><span class="text-rose-400 italic">استشفاء</span></td>
-                    </tr>
-                `;
-            });
+    selectedExercises.forEach(ex => {
+        const safeExName = ex.replace(/\s/g, '');
+        const saved10RM = localStorage.getItem(`10rm-${safeExName}`) || '';
 
-            html += `</tbody></table>`;
-            container.innerHTML = html;
-        }
+        html += `
+            <tr class="border-b border-slate-800 hover:bg-slate-900/50 transition-colors">
+                <td class="p-3 font-bold text-slate-300">${ex}</td>
+                <td class="p-3">
+                    <input type="number" 
+                        id="input-10rm-${safeExName}" 
+                        value="${saved10RM}"
+                        placeholder="0"
+                        oninput="updateWaveWeights('${safeExName}')"
+                        class="w-20 bg-slate-950 border border-slate-700 rounded p-1.5 text-center text-cyan-400 font-bold outline-none focus:border-cyan-500">
+                </td>
+                <td class="p-3 text-[11px]">
+                    <span id="w1-${safeExName}" class="text-white font-bold text-sm">-</span> <span class="text-slate-500">${currentUnit}</span><br>
+                    <span class="text-slate-500 italic">12-15 تكرار</span>
+                </td>
+                <td class="p-3 text-[11px]">
+                    <span id="w2-${safeExName}" class="text-white font-bold text-sm">-</span> <span class="text-slate-500">${currentUnit}</span><br>
+                    <span class="text-slate-500 italic">8-10 تكرار</span>
+                </td>
+                <td class="p-3 text-[11px]">
+                    <span id="w3-${safeExName}" class="text-white font-bold text-sm">-</span> <span class="text-slate-500">${currentUnit}</span><br>
+                    <span class="text-slate-500 italic">5-6 تكرار</span>
+                </td>
+                <td class="p-3 text-[11px] bg-slate-900/50">
+                    <span id="w4-${safeExName}" class="text-rose-400 font-bold text-sm">-</span> <span class="text-rose-500/50">${currentUnit}</span><br>
+                    <span class="text-rose-500/70 italic">استشفاء</span>
+                </td>
+            </tr>
+        `;
+    });
+
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+
+    // تشغيل الحسابات للقيم المخزنة تلقائياً عند تحميل الجدول
+    selectedExercises.forEach(ex => updateWaveWeights(ex.replace(/\s/g, '')));
+}
 
         // --- Utils & Persistence ---
         function loadSavedData() {
