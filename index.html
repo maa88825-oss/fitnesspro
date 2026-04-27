@@ -16,37 +16,28 @@
         .glass-card { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.5); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-200 antialiased min-h-screen flex">
+<body class="bg-slate-950 text-slate-200 antialiased min-h-screen flex text-right">
 
     <aside class="w-64 bg-slate-900 border-l border-slate-800 flex-shrink-0 sticky top-0 h-screen hidden md:flex flex-col z-20">
         <div class="p-6 border-b border-slate-800 text-center">
             <h1 class="text-2xl font-bold bg-gradient-to-l from-emerald-400 to-cyan-400 bg-clip-text text-transparent">FIT PRO</h1>
-            <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-widest font-semibold">Master Trainer Dashboard</p>
+            <p class="text-[10px] text-slate-500 mt-1 uppercase tracking-widest font-semibold italic">Master Trainer Dashboard</p>
         </div>
         
         <nav class="flex-1 mt-4 overflow-y-auto">
             <button onclick="switchTab('rm-calc')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400 active" id="btn-rm-calc">
-                <i class="fas fa-calculator ml-3 w-5"></i><span>حاسبة 1RM</span>
+                <i class="fas fa-calculator ml-3 w-5 text-center"></i><span>حاسبة 1RM</span>
             </button>
             <button onclick="switchTab('exercise-db')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-exercise-db">
-                <i class="fas fa-book-medical ml-3 w-5"></i><span>قاموس التمارين</span>
+                <i class="fas fa-book-medical ml-3 w-5 text-center"></i><span>قاموس التمارين</span>
             </button>
             <button onclick="switchTab('gym-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-gym-prog">
-                <i class="fas fa-dumbbell ml-3 w-5"></i><span>برنامج التقويات</span>
-            </button>
-            <button onclick="switchTab('run-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-run-prog">
-                <i class="fas fa-running ml-3 w-5"></i><span>برنامج الجري</span>
-            </button>
-            <button onclick="switchTab('row-prog')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-row-prog">
-                <i class="fas fa-water ml-3 w-5"></i><span>برنامج التجديف</span>
-            </button>
-            <button onclick="switchTab('fitness-test')" class="sidebar-item w-full flex items-center px-6 py-4 transition-all hover:bg-slate-800 text-slate-400" id="btn-fitness-test">
-                <i class="fas fa-vial ml-3 w-5"></i><span>الاختبارات البدنية</span>
+                <i class="fas fa-dumbbell ml-3 w-5 text-center"></i><span>برنامج التقويات</span>
             </button>
         </nav>
     </aside>
 
-    <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-slate-950 to-slate-950">
+    <main class="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto bg-slate-950">
         
         <header class="h-16 bg-slate-900/60 backdrop-blur-md border-b border-slate-800 flex items-center justify-between px-8 sticky top-0 z-10">
             <div id="tab-title" class="text-lg font-bold text-white tracking-tight">حاسبة 1RM والشدة</div>
@@ -62,8 +53,8 @@
                 <div class="flex justify-between items-center bg-slate-900/50 p-4 rounded-2xl border border-slate-800">
                     <h2 class="text-xl font-bold text-emerald-400 italic">MAX STRENGTH DATA</h2>
                     <div class="flex bg-slate-950 p-1 rounded-xl border border-slate-800">
-                        <button onclick="setUnit('KG')" id="unit-kg" class="px-5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold transition-all shadow-lg shadow-emerald-500/20">KG</button>
-                        <button onclick="setUnit('LB')" id="unit-lb" class="px-5 py-1.5 rounded-lg text-slate-400 font-bold transition-all">LB</button>
+                        <button onclick="setUnit('KG')" id="unit-kg" class="px-5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold shadow-lg shadow-emerald-500/20">KG</button>
+                        <button onclick="setUnit('LB')" id="unit-lb" class="px-5 py-1.5 rounded-lg text-slate-400 font-bold">LB</button>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="rm-inputs-container"></div>
@@ -71,8 +62,8 @@
 
             <section id="exercise-db" class="tab-content space-y-6">
                 <div class="text-center py-4">
-                    <h2 class="text-3xl font-black text-white mb-2 tracking-tighter">EXERCISE DICTIONARY</h2>
-                    <p class="text-slate-500 text-sm italic">اختر التمارين لإضافتها لبرنامج التقويات</p>
+                    <h2 class="text-3xl font-black text-white mb-2 tracking-tighter uppercase">Exercise Dictionary</h2>
+                    <p class="text-slate-500 text-sm italic">اضغط على التمارين لإضافتها للجدول</p>
                 </div>
                 <div id="exercise-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"></div>
             </section>
@@ -81,23 +72,16 @@
                 <div class="glass-card p-6 rounded-3xl">
                     <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                         <div>
-                            <h2 class="text-2xl font-black text-cyan-400 tracking-tight">Wave Periodization (12 Weeks)</h2>
-                            <p class="text-slate-500 text-xs mt-1 font-medium">نظام الموجات الاحترافي - يعتمد على وزن 10RM الخاص بك</p>
+                            <h2 class="text-2xl font-black text-cyan-400 tracking-tight uppercase">Wave Periodization (12 Weeks)</h2>
+                            <p class="text-slate-500 text-xs mt-1 font-medium italic">شدة الأسبوع الأول = 70% من الـ 1RM (محسوبة من وزن الـ 10RM)</p>
                         </div>
                         <button onclick="generateGymProgram()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-black px-8 py-3 rounded-2xl shadow-xl shadow-cyan-900/20 transition-all flex items-center justify-center gap-2">
                             <i class="fas fa-sync-alt"></i> تحديث البرنامج
                         </button>
                     </div>
-                    <div id="gym-program-table" class="bg-slate-950/50 rounded-2xl border border-slate-800 p-2 overflow-hidden">
-                        <p class="text-slate-500 text-center py-20 font-medium italic">برجاء اختيار تمارين من القاموس أولاً لبناء البرنامج.</p>
-                    </div>
+                    <div id="gym-program-table" class="bg-slate-950/50 rounded-2xl border border-slate-800 p-2 overflow-hidden"></div>
                 </div>
             </section>
-
-            <section id="run-prog" class="tab-content text-center py-20 text-slate-500 italic">برنامج الجري قيد التطوير...</section>
-            <section id="row-prog" class="tab-content text-center py-20 text-slate-500 italic">برنامج التجديف قيد التطوير...</section>
-            <section id="fitness-test" class="tab-content text-center py-20 text-slate-500 italic">الاختبارات البدنية قيد التطوير...</section>
-
         </div>
     </main>
 
@@ -110,6 +94,7 @@
             renderRMInputs();
             renderDictionary();
             loadSavedData();
+            if (selectedExercises.length > 0) generateGymProgram();
         });
 
         function switchTab(tabId) {
@@ -121,12 +106,10 @@
             const titles = {
                 'rm-calc': 'حاسبة الـ 1RM والشدة',
                 'exercise-db': 'قاموس التمارين الشامل',
-                'gym-prog': 'برنامج التقويات - Wave System',
-                'run-prog': 'تطوير الجري - 30 Min Run',
-                'row-prog': 'برنامج التجديف Concept 2',
-                'fitness-test': 'الاختبارات والتحليل البدني'
+                'gym-prog': 'برنامج التقويات - Wave System'
             };
             document.getElementById('tab-title').innerText = titles[tabId];
+            if (tabId === 'gym-prog') generateGymProgram();
         }
 
         function setUnit(unit) {
@@ -135,21 +118,20 @@
             document.getElementById('unit-lb').className = unit === 'LB' ? 'px-5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold transition-all shadow-lg shadow-emerald-500/20' : 'px-5 py-1.5 rounded-lg text-slate-400 font-bold transition-all';
             renderRMInputs();
             loadSavedData();
-            if(document.getElementById('gym-prog').classList.contains('active')) generateGymProgram();
         }
 
         function renderRMInputs() {
             const container = document.getElementById('rm-inputs-container');
             if(!container) return;
             container.innerHTML = baseExercises.map(ex => `
-                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 hover:border-emerald-500/30 transition-all shadow-sm">
+                <div class="bg-slate-900/80 p-5 rounded-2xl border border-slate-800 transition-all shadow-sm">
                     <h3 class="text-lg font-bold text-white mb-4 flex justify-between items-center">${ex} <span class="text-[10px] text-slate-500 font-bold px-2 py-1 bg-slate-950 rounded border border-slate-800">${currentUnit}</span></h3>
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <input type="number" id="w-${ex}" placeholder="الوزن" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-bold focus:ring-1 focus:ring-emerald-500 outline-none text-center">
-                        <input type="number" id="r-${ex}" placeholder="تكرار" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-bold focus:ring-1 focus:ring-emerald-500 outline-none text-center">
+                    <div class="grid grid-cols-2 gap-3 mb-4 text-center">
+                        <input type="number" id="w-${ex}" placeholder="الوزن" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-bold outline-none text-center focus:border-emerald-500">
+                        <input type="number" id="r-${ex}" placeholder="تكرار" oninput="calculateRM('${ex}')" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-emerald-400 font-bold outline-none text-center focus:border-emerald-500">
                     </div>
                     <div id="table-${ex}" class="mt-2 text-center hidden">
-                        <div class="text-xs font-bold text-slate-500 uppercase mb-1">Max Predicted (1RM)</div>
+                        <div class="text-xs font-bold text-slate-500 uppercase mb-1 italic text-center">Max 1RM</div>
                         <div class="text-2xl font-black text-emerald-400" id="res-${ex}">0</div>
                     </div>
                 </div>
@@ -159,23 +141,23 @@
         function calculateRM(ex) {
             const w = parseFloat(document.getElementById(`w-${ex}`).value);
             const r = parseFloat(document.getElementById(`r-${ex}`).value);
-            const container = document.getElementById(`table-${ex}`);
+            const resContainer = document.getElementById(`table-${ex}`);
             if (w > 0 && r > 0) {
                 const rm = w * (1 + r / 30);
-                document.getElementById(`res-${ex}`).innerText = rm.toFixed(1);
-                container.classList.remove('hidden');
+                document.getElementById(`res-${ex}`).innerText = Math.round(rm);
+                resContainer.classList.remove('hidden');
                 localStorage.setItem(`data-${ex}`, JSON.stringify({w, r}));
             } else {
-                container.classList.add('hidden');
+                resContainer.classList.add('hidden');
             }
         }
 
         const dictionaryData = {
-            "Chest (الصدر)": ["Flat Bench Press", "Incline Bench Press", "Flat Dumbbell Press", "Chest Press Machine", "Pec Deck Machine"],
-            "Back (الظهر)": ["Deadlift", "Bent-Over Barbell Row", "Lat Pulldown", "Seated Cable Row", "Face Pulls"],
-            "Legs (الأرجل)": ["Back Squat", "Front Squat", "Leg Press", "Leg Extension", "Leg Curl", "Calf Raise"],
-            "Shoulders (الأكتاف)": ["Overhead Press", "Dumbbell Shoulder Press", "Lateral Raise", "Rear Delt Raise"],
-            "Arms (الذراعين)": ["Barbell Curl", "EZ-Bar Curl", "Close-Grip Bench Press", "Skull Crushers", "Cable Rope Pushdown"]
+            "Chest (الصدر)": ["Flat Bench Press", "Incline Bench Press", "Flat Dumbbell Press", "Chest Press Machine"],
+            "Back (الظهر)": ["Deadlift", "Bent-Over Barbell Row", "Lat Pulldown", "Seated Cable Row"],
+            "Legs (الأرجل)": ["Back Squat", "Front Squat", "Leg Press", "Leg Extension", "Leg Curl"],
+            "Shoulders (الأكتاف)": ["Overhead Press", "Dumbbell Shoulder Press", "Lateral Raise"],
+            "Arms (الذراعين)": ["Barbell Curl", "Skull Crushers", "Cable Rope Pushdown"]
         };
 
         function renderDictionary() {
@@ -183,12 +165,12 @@
             if(!grid) return;
             grid.innerHTML = Object.entries(dictionaryData).map(([category, items]) => `
                 <div class="bg-slate-900/50 p-5 rounded-3xl border border-slate-800">
-                    <h3 class="text-amber-400 font-black mb-4 border-b border-slate-800 pb-2 flex items-center gap-2"><i class="fas fa-layer-group text-xs opacity-50"></i> ${category}</h3>
+                    <h3 class="text-amber-400 font-black mb-4 border-b border-slate-800 pb-2">${category}</h3>
                     <div class="space-y-1">
                         ${items.map(item => `
                             <div class="flex items-center justify-between p-3 hover:bg-slate-800 rounded-xl transition-all cursor-pointer group" onclick="toggleSelect('${item}')">
                                 <span class="text-sm text-slate-300 font-medium group-hover:text-white">${item}</span>
-                                <i class="fas ${selectedExercises.includes(item) ? 'fa-check-circle text-emerald-500' : 'fa-plus-circle text-slate-700'}" id="icon-${item.replace(/\s/g, '')}"></i>
+                                <i class="fas ${selectedExercises.includes(item) ? 'fa-check-circle text-emerald-500' : 'fa-plus-circle text-slate-700'}"></i>
                             </div>
                         `).join('')}
                     </div>
@@ -204,91 +186,13 @@
             renderDictionary();
         }
 
-        
-            function generateGymProgram() {
-    const container = document.getElementById('gym-program-table');
-    if (selectedExercises.length === 0) {
-        container.innerHTML = '<p class="text-slate-500 text-center py-20 italic">برجاء اختيار تمارين من القاموس أولاً.</p>';
-        return;
-    }
+        function generateGymProgram() {
+            const container = document.getElementById('gym-program-table');
+            if (selectedExercises.length === 0) {
+                container.innerHTML = '<p class="text-slate-500 text-center py-20 italic">برجاء اختيار تمارين من القاموس أولاً.</p>';
+                return;
+            }
 
-    let html = `
-        <div class="overflow-x-auto">
-        <table class="w-full text-right border-collapse min-w-[800px]">
-            <thead>
-                <tr class="bg-slate-900/80 text-cyan-400 text-[10px] font-black uppercase tracking-widest text-center">
-                    <th class="p-4 text-right">التمرين (Exercise)</th>
-                    <th class="p-4 border-x border-slate-800/50">وزن 10RM</th>
-                    <th class="p-4">أسبوع 1 (70%)</th>
-                    <th class="p-4">أسبوع 2 (80%)</th>
-                    <th class="p-4">أسبوع 3 (90%)</th>
-                    <th class="p-4 bg-slate-800/40 text-white">أسبوع 4 (Deload)</th>
-                </tr>
-            </thead>
-            <tbody class="text-sm">
-    `;
-
-    selectedExercises.forEach(ex => {
-        const safeExName = ex.replace(/\s/g, '');
-        const saved10RM = localStorage.getItem(`10rm-${safeExName}`) || '';
-
-        html += `
-            <tr class="border-b border-slate-900 hover:bg-slate-800/20 transition-all text-center">
-                <td class="p-4 text-right font-bold text-slate-200">${ex}</td>
-                <td class="p-4 border-x border-slate-900/50">
-                    <input type="number" 
-                        id="input-10rm-${safeExName}" 
-                        value="${saved10RM}"
-                        placeholder="0"
-                        oninput="updateWaveWeights('${safeExName}')"
-                        class="w-16 bg-slate-950 border border-slate-800 rounded-lg p-2 text-center text-cyan-400 font-black outline-none focus:border-cyan-500 shadow-inner">
-                </td>
-                <td class="p-4">
-                    <div class="text-white font-black text-xl mb-1"><span id="w1-${safeExName}">-</span></div>
-                    <div class="text-[11px] text-emerald-500 font-bold">3 مجموعات × 12</div>
-                </td>
-                <td class="p-4">
-                    <div class="text-white font-black text-xl mb-1"><span id="w2-${safeExName}">-</span></div>
-                    <div class="text-[11px] text-emerald-500 font-bold">4 مجموعات × 8</div>
-                </td>
-                <td class="p-4">
-                    <div class="text-white font-black text-xl mb-1"><span id="w3-${safeExName}">-</span></div>
-                    <div class="text-[11px] text-emerald-500 font-bold">4 مجموعات × 5</div>
-                </td>
-                <td class="p-4 bg-slate-900/50">
-                    <div class="text-rose-400 font-black text-xl mb-1"><span id="w4-${safeExName}">-</span></div>
-                    <div class="text-[10px] text-rose-500/60 font-bold italic">2 مجموعة × 10</div>
-                </td>
-            </tr>
-        `;
-    });
-
-    html += `</tbody></table></div>`;
-    container.innerHTML = html;
-    
-    // تنفيذ الحساب فوراً لكل التمارين المختارة
-    selectedExercises.forEach(ex => updateWaveWeights(ex.replace(/\s/g, '')));
-}
-
-function updateWaveWeights(safeExName) {
-    const inputEl = document.getElementById(`input-10rm-${safeExName}`);
-    if (!inputEl) return;
-    
-    const val10rm = parseFloat(inputEl.value);
-    if (val10rm > 0) {
-        const rm1 = val10rm / 0.75; 
-        
-        // التقريب لأقرب رقم صحيح Math.round بناءً على الـ 70% اللي طلبتها
-        document.getElementById(`w1-${safeExName}`).innerText = Math.round(rm1 * 0.70);
-        document.getElementById(`w2-${safeExName}`).innerText = Math.round(rm1 * 0.80);
-        document.getElementById(`w3-${safeExName}`).innerText = Math.round(rm1 * 0.90);
-        document.getElementById(`w4-${safeExName}`).innerText = Math.round(rm1 * 0.55);
-
-        localStorage.setItem(`10rm-${safeExName}`, val10rm);
-    } else {
-        ['w1','w2','w3','w4'].forEach(w => {
-            const el = document.getElementById(`${w}-${safeExName}`);
-            if (el) el.innerText = '-';
-        });
-    }
-}
+            let html = `
+                <div class="overflow-x-auto">
+                <table class="w-full text-center
