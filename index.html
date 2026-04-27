@@ -204,88 +204,91 @@
             renderDictionary();
         }
 
-        function generateGymProgram() {
-            const container = document.getElementById('gym-program-table');
-            if (selectedExercises.length === 0) {
-                container.innerHTML = '<p class="text-slate-500 text-center py-20 italic">برجاء اختيار تمارين من القاموس أولاً.</p>';
-                return;
-            }
+        
+            function generateGymProgram() {
+    const container = document.getElementById('gym-program-table');
+    if (selectedExercises.length === 0) {
+        container.innerHTML = '<p class="text-slate-500 text-center py-20 italic">برجاء اختيار تمارين من القاموس أولاً.</p>';
+        return;
+    }
 
-            let html = `
-                <div class="overflow-x-auto">
-                <table class="w-full text-right border-collapse min-w-[800px]">
-                    <thead>
-                        <tr class="bg-slate-900/80 text-cyan-400 text-[10px] font-black uppercase tracking-widest text-center">
-                            <th class="p-4 text-right">التمرين (Exercise)</th>
-                            <th class="p-4 border-x border-slate-800/50">وزن 10RM</th>
-                            <th class="p-4">أسبوع 1 (70%)</th>
-                            <th class="p-4">أسبوع 2 (80%)</th>
-                            <th class="p-4">أسبوع 3 (90%)</th>
-                            <th class="p-4 bg-slate-800/40 text-white">أسبوع 4 (Deload)</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-            `;
+    let html = `
+        <div class="overflow-x-auto">
+        <table class="w-full text-right border-collapse min-w-[800px]">
+            <thead>
+                <tr class="bg-slate-900/80 text-cyan-400 text-[10px] font-black uppercase tracking-widest text-center">
+                    <th class="p-4 text-right">التمرين (Exercise)</th>
+                    <th class="p-4 border-x border-slate-800/50">وزن 10RM</th>
+                    <th class="p-4">أسبوع 1 (70%)</th>
+                    <th class="p-4">أسبوع 2 (80%)</th>
+                    <th class="p-4">أسبوع 3 (90%)</th>
+                    <th class="p-4 bg-slate-800/40 text-white">أسبوع 4 (Deload)</th>
+                </tr>
+            </thead>
+            <tbody class="text-sm">
+    `;
 
-            selectedExercises.forEach(ex => {
-                const safeExName = ex.replace(/\s/g, '');
-                const saved10RM = localStorage.getItem(`10rm-${safeExName}`) || '';
+    selectedExercises.forEach(ex => {
+        const safeExName = ex.replace(/\s/g, '');
+        const saved10RM = localStorage.getItem(`10rm-${safeExName}`) || '';
 
-                html += `
-                    <tr class="border-b border-slate-900 hover:bg-slate-800/20 transition-all text-center">
-                        <td class="p-4 text-right font-bold text-slate-200">${ex}</td>
-                        <td class="p-4 border-x border-slate-900/50">
-                            <input type="number" 
-                                id="input-10rm-${safeExName}" 
-                                value="${saved10RM}"
-                                placeholder="0"
-                                oninput="updateWaveWeights('${safeExName}')"
-                                class="w-16 bg-slate-950 border border-slate-800 rounded-lg p-2 text-center text-cyan-400 font-black outline-none focus:border-cyan-500 shadow-inner">
-                        </td>
-                        <td class="p-4"><div class="text-white font-black text-lg" id="w1-${safeExName}">-</div><div class="text-[10px] text-slate-500 font-bold uppercase">12-15 Reps</div></td>
-                        <td class="p-4"><div class="text-white font-black text-lg" id="w2-${safeExName}">-</div><div class="text-[10px] text-slate-500 font-bold uppercase">8-10 Reps</div></td>
-                        <td class="p-4"><div class="text-white font-black text-lg" id="w3-${safeExName}">-</div><div class="text-[10px] text-slate-500 font-bold uppercase">5-6 Reps</div></td>
-                        <td class="p-4 bg-slate-900/50"><div class="text-rose-400 font-black text-lg" id="w4-${safeExName}">-</div><div class="text-[10px] text-rose-500/40 font-bold uppercase italic">Deload</div></td>
-                    </tr>
-                `;
-            });
+        html += `
+            <tr class="border-b border-slate-900 hover:bg-slate-800/20 transition-all text-center">
+                <td class="p-4 text-right font-bold text-slate-200">${ex}</td>
+                <td class="p-4 border-x border-slate-900/50">
+                    <input type="number" 
+                        id="input-10rm-${safeExName}" 
+                        value="${saved10RM}"
+                        placeholder="0"
+                        oninput="updateWaveWeights('${safeExName}')"
+                        class="w-16 bg-slate-950 border border-slate-800 rounded-lg p-2 text-center text-cyan-400 font-black outline-none focus:border-cyan-500 shadow-inner">
+                </td>
+                <td class="p-4">
+                    <div class="text-white font-black text-xl mb-1"><span id="w1-${safeExName}">-</span></div>
+                    <div class="text-[11px] text-emerald-500 font-bold">3 مجموعات × 12</div>
+                </td>
+                <td class="p-4">
+                    <div class="text-white font-black text-xl mb-1"><span id="w2-${safeExName}">-</span></div>
+                    <div class="text-[11px] text-emerald-500 font-bold">4 مجموعات × 8</div>
+                </td>
+                <td class="p-4">
+                    <div class="text-white font-black text-xl mb-1"><span id="w3-${safeExName}">-</span></div>
+                    <div class="text-[11px] text-emerald-500 font-bold">4 مجموعات × 5</div>
+                </td>
+                <td class="p-4 bg-slate-900/50">
+                    <div class="text-rose-400 font-black text-xl mb-1"><span id="w4-${safeExName}">-</span></div>
+                    <div class="text-[10px] text-rose-500/60 font-bold italic">2 مجموعة × 10</div>
+                </td>
+            </tr>
+        `;
+    });
 
-            html += `</tbody></table></div>`;
-            container.innerHTML = html;
-            selectedExercises.forEach(ex => updateWaveWeights(ex.replace(/\s/g, '')));
-        }
+    html += `</tbody></table></div>`;
+    container.innerHTML = html;
+    
+    // تنفيذ الحساب فوراً لكل التمارين المختارة
+    selectedExercises.forEach(ex => updateWaveWeights(ex.replace(/\s/g, '')));
+}
 
-        function updateWaveWeights(safeExName) {
-            const inputEl = document.getElementById(`input-10rm-${safeExName}`);
-            if (!inputEl) return;
-            
-            const val10rm = parseFloat(inputEl.value);
-            if (val10rm > 0) {
-                const rm1 = val10rm / 0.75; // التحويل للـ 1RM (10 reps = 75%)
-                
-                // حساب الشدات المطلوبة (الأسبوع الأول 70%)
-                document.getElementById(`w1-${safeExName}`).innerText = (rm1 * 0.70).toFixed(1);
-                document.getElementById(`w2-${safeExName}`).innerText = (rm1 * 0.80).toFixed(1);
-                document.getElementById(`w3-${safeExName}`).innerText = (rm1 * 0.90).toFixed(1);
-                document.getElementById(`w4-${safeExName}`).innerText = (rm1 * 0.55).toFixed(1);
+function updateWaveWeights(safeExName) {
+    const inputEl = document.getElementById(`input-10rm-${safeExName}`);
+    if (!inputEl) return;
+    
+    const val10rm = parseFloat(inputEl.value);
+    if (val10rm > 0) {
+        const rm1 = val10rm / 0.75; 
+        
+        // التقريب لأقرب رقم صحيح Math.round بناءً على الـ 70% اللي طلبتها
+        document.getElementById(`w1-${safeExName}`).innerText = Math.round(rm1 * 0.70);
+        document.getElementById(`w2-${safeExName}`).innerText = Math.round(rm1 * 0.80);
+        document.getElementById(`w3-${safeExName}`).innerText = Math.round(rm1 * 0.90);
+        document.getElementById(`w4-${safeExName}`).innerText = Math.round(rm1 * 0.55);
 
-                localStorage.setItem(`10rm-${safeExName}`, val10rm);
-            } else {
-                ['w1','w2','w3','w4'].forEach(w => document.getElementById(`${w}-${safeExName}`).innerText = '-');
-            }
-        }
-
-        function loadSavedData() {
-            baseExercises.forEach(ex => {
-                const saved = localStorage.getItem(`data-${ex}`);
-                if (saved && document.getElementById(`w-${ex}`)) {
-                    const {w, r} = JSON.parse(saved);
-                    document.getElementById(`w-${ex}`).value = w;
-                    document.getElementById(`r-${ex}`).value = r;
-                    calculateRM(ex);
-                }
-            });
-        }
-    </script>
-</body>
-</html>
+        localStorage.setItem(`10rm-${safeExName}`, val10rm);
+    } else {
+        ['w1','w2','w3','w4'].forEach(w => {
+            const el = document.getElementById(`${w}-${safeExName}`);
+            if (el) el.innerText = '-';
+        });
+    }
+}
