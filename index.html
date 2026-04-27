@@ -11,67 +11,81 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        /* تحسين مظهر السكرول بار */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
     </style>
 </head>
 <body class="text-slate-200 antialiased">
 
-    <div class="flex min-h-screen overflow-hidden">
-        
+    <div class="flex min-h-screen">
         <aside class="w-20 md:w-72 bg-slate-900 border-l border-slate-800 flex flex-col items-center py-10 px-4 sticky top-0 h-screen z-50">
-            <div class="mb-12 text-emerald-500 font-black text-2xl hidden md:block italic tracking-tighter">
-                FITNESS TIME <span class="text-white">PRO</span>
+            <div class="mb-12 text-emerald-500 font-black text-xl hidden md:block italic tracking-tighter text-center leading-tight">
+                FITNESS TIME <span class="text-white block">PRO DASHBOARD</span>
             </div>
-
             <nav class="flex flex-col gap-3 w-full">
-                <button onclick="showTab(1)" class="tab-btn active w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="1">
-                    <span class="text-xl">📊</span>
-                    <span class="hidden md:block text-sm font-bold">حاسبة الأوزان 1RM</span>
+                <button onclick="showTab(1)" class="tab-btn active w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800 group" data-tab="1">
+                    <span class="text-xl">📊</span> <span class="hidden md:block text-sm font-bold">حاسبة 1RM</span>
                 </button>
-
-                <button onclick="showTab(2)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="2">
-                    <span class="text-xl">📖</span>
-                    <span class="hidden md:block text-sm font-bold">قاموس التمارين</span>
+                <button onclick="showTab(2)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="2">
+                    <span class="text-xl">📖</span> <span class="hidden md:block text-sm font-bold">قاموس التمارين</span>
                 </button>
-
-                <button onclick="showTab(3)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="3">
-                    <span class="text-xl">🏋️</span>
-                    <span class="hidden md:block text-sm font-bold">برنامج التقويات</span>
+                <button onclick="showTab(3)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="3">
+                    <span class="text-xl">🏋️</span> <span class="hidden md:block text-sm font-bold">برنامج التقويات</span>
                 </button>
-
-                <button onclick="showTab(4)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="4">
-                    <span class="text-xl">🏃</span>
-                    <span class="hidden md:block text-sm font-bold">تطوير الجري</span>
+                <button onclick="showTab(4)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="4">
+                    <span class="text-xl">🏃</span> <span class="hidden md:block text-sm font-bold">تطوير الجري</span>
                 </button>
-
-                <button onclick="showTab(5)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="5">
-                    <span class="text-xl">🚣</span>
-                    <span class="hidden md:block text-sm font-bold">تمرين التجديف</span>
+                <button onclick="showTab(5)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="5">
+                    <span class="text-xl">🚣</span> <span class="hidden md:block text-sm font-bold">التجديف</span>
                 </button>
-
-                <button onclick="showTab(6)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition-all duration-200 text-slate-400 hover:bg-slate-800 group" data-tab="6">
-                    <span class="text-xl">🎯</span>
-                    <span class="hidden md:block text-sm font-bold">الاختبارات البدنية</span>
+                <button onclick="showTab(6)" class="tab-btn w-full flex items-center justify-center md:justify-start gap-4 p-4 rounded-2xl transition text-slate-400 hover:bg-slate-800" data-tab="6">
+                    <span class="text-xl">🎯</span> <span class="hidden md:block text-sm font-bold">الاختبارات</span>
                 </button>
             </nav>
-
-            <div class="mt-auto hidden md:block w-full bg-slate-950/50 p-4 rounded-3xl border border-slate-800">
-                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-widest mb-1">Coach Profile</p>
-                <p class="text-sm text-white font-bold">Mohamed Ali</p>
-                <p class="text-[10px] text-emerald-500">Fitness Manager</p>
-            </div>
         </aside>
 
         <main class="flex-1 p-6 md:p-12 overflow-y-auto h-screen bg-slate-950">
             
-            <div id="tabs-container">
-                <div class="text-center py-20">
-                    <h1 class="text-4xl font-black text-white mb-4">مرحباً بك في لوحة التحكم</h1>
-                    <p class="text-slate-400">اختر أحد الأقسام من القائمة الجانبية للبدء.</p>
+            <div id="tab-1" class="tab-content active">
+                <h2 class="text-2xl font-black text-white mb-6 border-b border-slate-800 pb-4">حاسبة الـ 1RM والشدة</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="rm-grid"></div>
+            </div>
+
+            <div id="tab-2" class="tab-content">
+                <h2 class="text-2xl font-black text-white mb-6">قاموس التمارين</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="exercise-grid"></div>
+            </div>
+
+            <div id="tab-3" class="tab-content">
+                <h2 class="text-2xl font-black text-white mb-6">برنامج التقويات (Waves)</h2>
+                <button onclick="generateWaves()" class="bg-emerald-600 p-4 rounded-xl font-bold mb-8">توليد برنامج الـ 12 أسبوع</button>
+                <div id="waves-container" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </div>
+
+            <div id="tab-4" class="tab-content text-center py-10">
+                <h2 class="text-2xl font-black text-white mb-6">مناطق نبض القلب (Running)</h2>
+                <input type="number" id="age-input" placeholder="أدخل عمرك" class="bg-slate-900 p-4 rounded-xl border border-slate-700 text-center text-white mb-6">
+                <button onclick="calcZones()" class="bg-blue-600 p-4 rounded-xl block mx-auto">احسب المناطق</button>
+                <div id="zones-res" class="mt-8 space-y-4 max-w-md mx-auto"></div>
+            </div>
+
+            <div id="tab-5" class="tab-content text-center">
+                <h2 class="text-2xl font-black text-white mb-6 uppercase italic">Rowing Concept 2</h2>
+                <div class="flex gap-2 justify-center mb-6">
+                    <input type="number" id="row-m" placeholder="دقيقة" class="bg-slate-900 p-3 rounded-lg text-white w-24">
+                    <input type="number" id="row-s" placeholder="ثانية" class="bg-slate-900 p-3 rounded-lg text-white w-24">
+                </div>
+                <button onclick="calcRow()" class="bg-orange-600 p-4 rounded-xl">تحليل الـ Split</button>
+                <div id="row-res" class="mt-8 text-3xl font-black text-orange-500 italic"></div>
+            </div>
+
+            <div id="tab-6" class="tab-content">
+                <h2 class="text-2xl font-black text-white mb-6 italic uppercase">Physical Benchmarks</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-slate-900 p-6 rounded-3xl border border-slate-800">
+                        <p class="text-purple-400 font-bold mb-4">Cooper Test (12m)</p>
+                        <input type="number" id="cooper-in" placeholder="المسافة بالمتر" class="bg-slate-950 p-3 rounded-lg w-full text-white mb-4">
+                        <button onclick="evalTest('cooper')" class="bg-purple-600 w-full p-2 rounded-lg font-bold">تقييم</button>
+                        <div id="cooper-res" class="mt-4 font-bold"></div>
+                    </div>
                 </div>
             </div>
 
@@ -79,385 +93,67 @@
     </div>
 
     <script>
-        function showTab(tabId) {
-            // إخفاء كل التبويبات
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
-
-            // إظهار التبويب المحدد
-            const target = document.getElementById(`tab-${tabId}`);
-            if (target) target.classList.add('active');
-
-            // تغيير شكل الأزرار (Highlight)
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-slate-800', 'text-emerald-500', 'shadow-lg');
-                if (btn.dataset.tab == tabId) {
-                    btn.classList.add('bg-slate-800', 'text-emerald-500', 'shadow-lg');
-                }
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`tab-${id}`).classList.add('active');
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('bg-slate-800', 'text-emerald-500');
+                if(b.dataset.tab == id) b.classList.add('bg-slate-800', 'text-emerald-500');
             });
         }
-    </script>
 
+        // Logic for 1RM
+        const exList = ["Back Squat", "Front Squat", "Shoulder Press", "Deadlift", "Clean", "Snatch"];
+        function initRM() {
+            const grid = document.getElementById('rm-grid');
+            exList.forEach((ex, i) => {
+                grid.innerHTML += `
+                    <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
+                        <h4 class="text-emerald-500 font-bold mb-4 uppercase text-xs">${ex}</h4>
+                        <div class="flex gap-2 mb-4 text-slate-950">
+                            <input type="number" id="w-${i}" oninput="update(${i})" placeholder="وزن" class="w-1/2 p-2 rounded-lg bg-slate-950 text-white border border-slate-800 outline-none">
+                            <input type="number" id="r-${i}" oninput="update(${i})" placeholder="عدات" class="w-1/2 p-2 rounded-lg bg-slate-950 text-white border border-slate-800 outline-none">
+                        </div>
+                        <div class="text-center bg-slate-950 p-3 rounded-xl border border-slate-800">
+                            <span id="res-${i}" class="text-3xl font-black text-white">0</span> <span class="text-[10px] text-slate-500">KG</span>
+                        </div>
+                    </div>`;
+            });
+        }
+        function update(i) {
+            const w = document.getElementById(`w-${i}`).value || 0;
+            const r = document.getElementById(`r-${i}`).value || 0;
+            const rm = r == 1 ? w : w * (1 + r/30);
+            document.getElementById(`res-${i}`).innerText = Math.round(rm);
+        }
+
+        // Running Zones
+        function calcZones() {
+            const age = document.getElementById('age-input').value || 38;
+            const max = 220 - age;
+            const res = document.getElementById('zones-res');
+            res.innerHTML = `
+                <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl text-emerald-400 font-bold">Zone 2 (Aerobic): ${Math.round(max*0.6)}-${Math.round(max*0.7)} BPM</div>
+                <div class="p-4 bg-red-500/10 border border-red-500/30 rounded-xl text-red-400 font-bold">Zone 4 (Threshold): ${Math.round(max*0.8)}-${Math.round(max*0.9)} BPM</div>
+            `;
+        }
+
+        // Rowing
+        function calcRow() {
+            const m = document.getElementById('row-m').value || 0;
+            const s = document.getElementById('row-s').value || 0;
+            const split = ((parseInt(m)*60) + parseInt(s)) / 4;
+            document.getElementById('row-res').innerText = `Pace: ${Math.floor(split/60)}:${Math.round(split%60).toString().padStart(2,'0')} /500m`;
+        }
+
+        // Tests
+        function evalTest(type) {
+            const v = document.getElementById('cooper-in').value;
+            let l = v > 2800 ? "ممتاز" : (v > 2200 ? "جيد" : "ضعيف");
+            document.getElementById('cooper-res').innerText = `التقييم: ${l}`;
+        }
+
+        window.onload = () => { initRM(); showTab(1); };
+    </script>
 </body>
 </html>
-<div id="tab-1" class="tab-content active transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4">
-        <h2 class="text-3xl font-black text-white">حاسبة الـ 1RM والشدة</h2>
-        <p class="text-slate-400 text-sm mt-1">حساب القدرة القصوى لكل تمرين وتوليد جدول النسب المئوية (40% - 100%).</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="rm-calculators-grid">
-        </div>
-</div>
-
-<script>
-    // قائمة التمارين الأساسية (تستطيع إضافة المزيد هنا)
-    const masterExercises = ["Back Squat", "Front Squat", "Deadlift", "Shoulder Press", "Bench Press", "Clean", "Snatch"];
-
-    function init1RM() {
-        const grid = document.getElementById('rm-calculators-grid');
-        grid.innerHTML = ''; // تفريغ المحتوى قبل التوليد
-
-        masterExercises.forEach((ex, idx) => {
-            // استرجاع البيانات المحفوظة من ذاكرة المتصفح
-            const saved = JSON.parse(localStorage.getItem(`rm-data-${idx}`)) || { w: '', r: '' };
-            
-            grid.innerHTML += `
-                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 shadow-xl hover:border-emerald-500/30 transition-all group">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-emerald-400 font-black uppercase text-sm tracking-widest italic">${ex}</h3>
-                        <span class="text-[10px] bg-slate-800 text-slate-500 px-2 py-1 rounded">Epley Formula</span>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-3 mb-4">
-                        <div>
-                            <label class="block text-[10px] text-slate-500 mb-1 uppercase font-bold">Weight (KG)</label>
-                            <input type="number" id="weight-${idx}" value="${saved.w}" oninput="updateRM(${idx})" 
-                                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white outline-none focus:border-emerald-500 transition-colors shadow-inner">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] text-slate-500 mb-1 uppercase font-bold">Reps</label>
-                            <input type="number" id="reps-${idx}" value="${saved.r}" oninput="updateRM(${idx})" 
-                                class="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-white outline-none focus:border-emerald-500 transition-colors shadow-inner">
-                        </div>
-                    </div>
-
-                    <div class="text-center bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4 group-hover:border-emerald-500/20 transition-all">
-                        <span class="text-[10px] text-slate-500 block uppercase font-bold mb-1">Estimated 1RM</span>
-                        <span id="result-${idx}" class="text-4xl font-black text-white leading-none">0</span>
-                        <span class="text-xs text-slate-500 ml-1">KG</span>
-                    </div>
-
-                    <div class="max-h-40 overflow-y-auto custom-scroll pr-2">
-                        <table class="w-full text-[11px] text-slate-400">
-                            <thead class="sticky top-0 bg-slate-900">
-                                <tr class="border-b border-slate-800">
-                                    <th class="py-1 text-right">Intensity</th>
-                                    <th class="py-1 text-left">Weight</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body-${idx}">
-                                </tbody>
-                        </table>
-                    </div>
-                </div>`;
-            
-            // تفعيل الحساب فور التحميل إذا كانت هناك بيانات محفوظة
-            setTimeout(() => updateRM(idx), 10);
-        });
-    }
-
-    function updateRM(idx) {
-        const weight = parseFloat(document.getElementById(`weight-${idx}`).value) || 0;
-        const reps = parseFloat(document.getElementById(`reps-${idx}`).value) || 0;
-        
-        // معادلة Epley لحساب الـ 1RM
-        let rm = 0;
-        if (reps === 1) {
-            rm = weight;
-        } else if (reps > 1) {
-            rm = weight * (1 + (reps / 30));
-        }
-
-        // عرض النتيجة
-        document.getElementById(`result-${idx}`).innerText = Math.round(rm);
-
-        // تحديث جدول النسب
-        const tbody = document.getElementById(`table-body-${idx}`);
-        tbody.innerHTML = '';
-        for (let percent = 100; percent >= 40; percent -= 5) {
-            const calculatedWeight = Math.round(rm * (percent / 100));
-            tbody.innerHTML += `
-                <tr class="border-b border-slate-800/30 hover:bg-slate-800/20 transition-colors">
-                    <td class="py-2 font-bold ${percent >= 90 ? 'text-red-400' : (percent >= 70 ? 'text-emerald-500' : 'text-slate-500')}">${percent}%</td>
-                    <td class="py-2 text-left text-slate-200">${calculatedWeight} KG</td>
-                </tr>`;
-        }
-
-        // حفظ البيانات في الذاكرة المحلية
-        localStorage.setItem(`rm-data-${idx}`, JSON.stringify({ w: weight, r: reps }));
-    }
-
-    // تشغيل الدالة عند تحميل الصفحة
-    document.addEventListener('DOMContentLoaded', init1RM);
-</script>
-
-<style>
-    /* تحسين شكل الجدول الداخلي */
-    .custom-scroll::-webkit-scrollbar { width: 3px; }
-    .custom-scroll::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 5px; }
-</style>
-<div id="tab-2" class="tab-content transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4 flex justify-between items-end">
-        <div>
-            <h2 class="text-3xl font-black text-white">قاموس التمارين</h2>
-            <p class="text-slate-400 text-sm mt-1">دليل شامل للتمارين الأساسية والمتقدمة مقسمة حسب العضلة المستهدفة.</p>
-        </div>
-        <div class="hidden md:block">
-            <span class="text-[10px] text-emerald-500 font-bold border border-emerald-500/20 px-3 py-1 rounded-full uppercase tracking-widest">Exercise Library</span>
-        </div>
-    </div>
-
-    <div class="flex flex-wrap gap-2 mb-8" id="muscle-filters">
-        <button onclick="filterExercises('all')" class="filter-btn active bg-emerald-600 text-white px-4 py-2 rounded-xl text-xs font-bold transition">الكل</button>
-        <button onclick="filterExercises('Legs')" class="filter-btn bg-slate-900 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">الأرجل</button>
-        <button onclick="filterExercises('Chest')" class="filter-btn bg-slate-900 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">الصدر</button>
-        <button onclick="filterExercises('Back')" class="filter-btn bg-slate-900 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">الظهر</button>
-        <button onclick="filterExercises('Shoulders')" class="filter-btn bg-slate-900 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">الأكتاف</button>
-        <button onclick="filterExercises('Core')" class="filter-btn bg-slate-900 text-slate-400 px-4 py-2 rounded-xl text-xs font-bold hover:bg-slate-800 transition">البطن</button>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="exercise-grid">
-        </div>
-</div>
-
-<script>
-    const exercises = [
-        { name: "Back Squat", muscle: "Legs", level: "Intermediate", icon: "🏋️" },
-        { name: "Front Squat", muscle: "Legs", level: "Advanced", icon: "🏋️" },
-        { name: "Bench Press", muscle: "Chest", level: "Beginner", icon: "💪" },
-        { name: "Deadlift", muscle: "Back", level: "Intermediate", icon: "⚡" },
-        { name: "Overhead Press", muscle: "Shoulders", level: "Beginner", icon: "⬆️" },
-        { name: "Pull-Ups", muscle: "Back", level: "Intermediate", icon: "🧗" },
-        { name: "Bulgarian Split Squat", muscle: "Legs", level: "Advanced", icon: "🔥" },
-        { name: "Incline Dumbbell Press", muscle: "Chest", level: "Beginner", icon: "📐" },
-        { name: "Lateral Raise", muscle: "Shoulders", level: "Beginner", icon: "👐" },
-        { name: "Plank", muscle: "Core", level: "Beginner", icon: "🧘" },
-        { name: "Leg Press", muscle: "Legs", level: "Beginner", icon: "🚜" },
-        { name: "Romanian Deadlift", muscle: "Back", level: "Intermediate", icon: "📉" }
-    ];
-
-    function initDictionary() {
-        renderExercises('all');
-    }
-
-    function renderExercises(filter) {
-        const grid = document.getElementById('exercise-grid');
-        grid.innerHTML = '';
-
-        const filtered = filter === 'all' ? exercises : exercises.filter(ex => ex.muscle === filter);
-
-        filtered.forEach(ex => {
-            grid.innerHTML += `
-                <div class="exercise-card bg-slate-900 border border-slate-800 p-5 rounded-3xl hover:border-emerald-500/40 transition-all group relative overflow-hidden">
-                    <div class="absolute -right-2 -top-2 text-4xl opacity-10 group-hover:opacity-20 transition-opacity">${ex.icon}</div>
-                    
-                    <div class="relative z-10">
-                        <span class="text-[9px] font-bold text-emerald-500 bg-emerald-500/10 px-2 py-0.5 rounded-full uppercase tracking-tighter">${ex.muscle}</span>
-                        <h3 class="text-white font-bold text-lg mt-2 group-hover:text-emerald-400 transition-colors">${ex.name}</h3>
-                        
-                        <div class="flex items-center gap-4 mt-4">
-                            <div class="flex flex-col">
-                                <span class="text-[10px] text-slate-500 uppercase">Difficulty</span>
-                                <span class="text-xs text-slate-300 font-medium">${ex.level}</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 pt-4 border-t border-slate-800 flex justify-between items-center">
-                            <span class="text-[10px] text-slate-500 italic">Compound Movement</span>
-                            <button class="text-emerald-500 hover:text-white transition-colors">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-
-    function filterExercises(muscle) {
-        // تحديث شكل الأزرار
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('bg-emerald-600', 'text-white', 'active');
-            btn.classList.add('bg-slate-900', 'text-slate-400');
-        });
-
-        event.currentTarget.classList.remove('bg-slate-900', 'text-slate-400');
-        event.currentTarget.classList.add('bg-emerald-600', 'text-white', 'active');
-
-        renderExercises(muscle);
-    }
-
-    // تشغيل عند التحميل
-    document.addEventListener('DOMContentLoaded', initDictionary);
-</script>
-
-<style>
-    .exercise-card:hover {
-        transform: translateY(-5px);
-    }
-</style>
-<div id="tab-2" class="tab-content transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4 flex justify-between items-center">
-        <div>
-            <h2 class="text-3xl font-black text-white">برنامج التقويات (Waves)</h2>
-            <p class="text-slate-400 text-sm mt-1">نظام الموجات التدريبية لتطوير القوة العضلية والتحمل على مدار 12 أسبوعاً.</p>
-        </div>
-        <div class="bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-2xl text-emerald-400 text-xs font-bold uppercase tracking-widest">
-            Periodization Matrix
-        </div>
-    </div>
-
-    <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl mb-8 shadow-2xl">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
-            <div class="md:col-span-2">
-                <label class="block text-xs font-bold text-emerald-500 uppercase mb-3 tracking-widest">اختيار نظام التدريب</label>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <button onclick="setSplit(1)" id="split-1" class="split-btn bg-slate-950 border border-slate-700 p-3 rounded-xl text-xs text-slate-400 hover:border-emerald-500 transition-all">Full Body (يوم)</button>
-                    <button onclick="setSplit(2)" id="split-2" class="split-btn bg-slate-950 border border-slate-700 p-3 rounded-xl text-xs text-slate-400 hover:border-emerald-500 transition-all">Upper/Lower (يومين)</button>
-                    <button onclick="setSplit(3)" id="split-3" class="split-btn active border-emerald-500 bg-emerald-500/10 p-3 rounded-xl text-xs text-emerald-500 font-bold transition-all">Push/Pull/Legs (3 أيام)</button>
-                </div>
-            </div>
-            <button onclick="generateWavePlan()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 rounded-2xl transition shadow-lg shadow-emerald-900/20 uppercase text-xs tracking-widest">
-                توليد الخطة الذكية
-            </button>
-        </div>
-    </div>
-
-    <div id="waves-container" class="space-y-10">
-        </div>
-</div>
-
-<script>
-    let currentSplit = 3;
-
-    function setSplit(num) {
-        currentSplit = num;
-        document.querySelectorAll('.split-btn').forEach(btn => {
-            btn.classList.remove('active', 'border-emerald-500', 'bg-emerald-500/10', 'text-emerald-500', 'font-bold');
-            btn.classList.add('border-slate-700', 'text-slate-400');
-        });
-        const activeBtn = document.getElementById(`split-${num}`);
-        activeBtn.classList.remove('border-slate-700', 'text-slate-400');
-        activeBtn.classList.add('active', 'border-emerald-500', 'bg-emerald-500/10', 'text-emerald-500', 'font-bold');
-    }
-
-    function generateWavePlan() {
-        const container = document.getElementById('waves-container');
-        container.innerHTML = ''; // مسح القديم
-
-        const waves = [
-            { title: "الموجة الأولى: التأسيس (Base Building)", color: "cyan", weeks: [1,2,3,4], intensity: "70% - 75%", reps: "12-15", focus: "تحسين التوافق العضلي العصبي والتحمل." },
-            { title: "الموجة الثانية: القوة الانفجارية (Power Phase)", color: "emerald", weeks: [5,6,7,8], intensity: "80% - 85%", reps: "8-10", focus: "زيادة القوة المطلقة وتطوير الحجم العضلي." },
-            { title: "الموجة الثالثة: الذروة (Peaking Phase)", color: "red", weeks: [9,10,11,12], intensity: "90% - 95%", reps: "3-5", focus: "الوصول لأقصى أداء ممكن (Max Effort)." }
-        ];
-
-        waves.forEach((wave, wIdx) => {
-            let waveHtml = `
-                <div class="wave-block">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="h-px flex-1 bg-slate-800"></div>
-                        <h3 class="text-${wave.color}-500 font-black text-sm uppercase tracking-[0.2em]">${wave.title}</h3>
-                        <div class="h-px flex-1 bg-slate-800"></div>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-4">
-            `;
-
-            wave.weeks.forEach(week => {
-                const isDeload = week % 4 === 0;
-                waveHtml += `
-                    <div class="bg-slate-900/50 border ${isDeload ? 'border-slate-700 opacity-60' : `border-${wave.color}-500/20`} p-5 rounded-3xl relative overflow-hidden group hover:bg-slate-900 transition-all">
-                        ${isDeload ? '<div class="absolute top-2 left-2 bg-slate-700 text-[8px] px-2 py-0.5 rounded text-white font-bold uppercase">Deload</div>' : ''}
-                        <p class="text-slate-500 text-[10px] font-bold uppercase mb-1">Week ${week}</p>
-                        <p class="text-white font-bold text-lg mb-4">${isDeload ? 'استشفاء نشط' : 'تدريب عالي الشدة'}</p>
-                        
-                        <div class="space-y-3">
-                            <div class="flex justify-between items-center bg-slate-950 p-2 rounded-xl border border-slate-800">
-                                <span class="text-[9px] text-slate-500 uppercase font-bold">Intensity</span>
-                                <span class="text-xs text-white font-black">${isDeload ? '50%' : wave.intensity}</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-slate-950 p-2 rounded-xl border border-slate-800">
-                                <span class="text-[9px] text-slate-500 uppercase font-bold">Volume</span>
-                                <span class="text-xs text-white font-black">${isDeload ? '2 Sets' : wave.reps} Reps</span>
-                            </div>
-                        </div>
-
-                        <div class="mt-4 text-[9px] text-slate-400 leading-relaxed italic">
-                            ${isDeload ? 'تركيز على المدى الحركي والاستشفاء.' : wave.focus}
-                        </div>
-                    </div>
-                `;
-            });
-
-            waveHtml += `</div></div>`;
-            container.innerHTML += waveHtml;
-        });
-    }
-
-    // تشغيل الخطة افتراضياً عند التحميل
-    document.addEventListener('DOMContentLoaded', generateWavePlan);
-</script>
-
-<style>
-    .split-btn.active {
-        box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
-    }
-    /* ألوان مخصصة للتوافق مع Tailwind إذا لم تكن معرفة */
-    .border-cyan-500\/20 { border-color: rgba(6, 182, 212, 0.2); }
-    .text-cyan-500 { color: #06b6d4; }
-    .border-red-500\/20 { border-color: rgba(239, 68, 68, 0.2); }
-</style>
-<div id="tab-4" class="tab-content transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4 flex justify-between items-center">
-        <div>
-            <h2 class="text-3xl font-black text-white">تطوير الجري (Endurance)</h2>
-            <p class="text-slate-400 text-sm mt-1">تحليل مناطق نبض القلب وبناء القدرة التنفسية للمسافات الطويلة.</p>
-        </div>
-        <div class="bg-blue-500/10 border border-blue-500/20 px-4 py-2 rounded-2xl text-blue-400 text-xs font-bold uppercase tracking-widest">
-            Aerobic Capacity
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-1 bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl">
-            <h3 class="text-white font-bold mb-6 flex items-center gap-2">
-                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
-                <div id="tab-5" class="tab-content transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4 flex justify-between items-center">
-        <div>
-            <h2 class="text-3xl font-black text-white">تطوير التجديف (Rowing)</h2>
-            <p class="text-slate-400 text-sm mt-1">تحليل الـ Split وتخطيط مسافات الـ 2K والـ 5K باستخدام جهاز Concept 2.</p>
-        </div>
-        <div class="bg-orange-500/10 border border-orange-500/20 px-4 py-2 rounded-2xl text-orange-400 text-xs font-bold uppercase tracking-widest">
-            Power Endurance
-        </div>
-    </div>
-
-<div id="tab-6" class="tab-content transition-all duration-300">
-    <div class="mb-8 border-b border-slate-800 pb-4 flex justify-between items-center">
-        <div>
-            <h2 class="text-3xl font-black text-white">الاختبارات البدنية</h2>
-            <p class="text-slate-400 text-sm mt-1">قياس مستوى التطور وتحديد نقاط القوة والضعف في الأداء البدني.</p>
-        </div>
-        <div class="bg-purple-500/10 border border-purple-500/20 px-4 py-2 rounded-2xl text-purple-400 text-xs font-bold uppercase tracking-widest">
-            Performance Audit
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl shadow-xl flex flex-col h-full">
-            <div class="flex justify-between items-start mb-6">
